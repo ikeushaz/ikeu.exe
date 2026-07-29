@@ -1031,15 +1031,31 @@ function esc(s){
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-const adj  = ['chaotic','cryptic','silent','glowing','rogue','electric','velvet','lunar','neon','haunted','soft','bitter','wild','tender'];
-const noun = ['ghost','signal','spark','echo','flame','void','pixel','storm','gremlin','dreamer','static','shadow','comet','glitch'];
-function anonName(id){ return `${adj[id % adj.length]}_${noun[Math.floor(id/adj.length) % noun.length]}`; }
+const arcaneNames = [
+  "VI_GHOST",
+  "CAITLYN_SHADOW",
+  "EKKO_REWIND",
+  "MEL_GILDED",
+  "VIKTOR_HEX",
+  "JAYCE_HAMMER",
+  "SEVIKA_STEEL",
+  "AMBESSA_WARLORD",
+  "SILCO_SMOKE",
+  "VANDER_HOUND",
+  "LORIS_SENTINEL",
+  "MADDIE_MIRAGE",
+  "SCAR_SPARK",
+  "SMEECH_RAT",
+  "RENNI_CINDER",
+  "ISHA_LIGHT",
+  "HEIMER_SPROCKET",
+  "SALO_GOLD",
+  "FINN_SERPENT",
+  "ELORA_BLOOM"
+];
 
-// — realtime —
-if(ready){
-  sb.channel('comments')
-    .on('postgres_changes',{event:'INSERT',schema:'public',table:'comments'}, loadComments)
-    .subscribe();
+function anonName(id){
+    return arcaneNames[(id - 1) % arcaneNames.length];
 }
 
 loadComments();
